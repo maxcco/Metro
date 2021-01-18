@@ -106,7 +106,7 @@ class AlbumCoverPagerAdapter(
             ViewCompat.setTransitionName(view, "lyrics")
             albumCover = view.findViewById(R.id.player_image)
             view.setOnClickListener {
-                showLyricsDialog()
+                //showLyricsDialog()
             }
             return view
         }
