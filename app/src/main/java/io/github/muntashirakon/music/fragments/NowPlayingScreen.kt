@@ -42,4 +42,5 @@ enum class NowPlayingScreen constructor(
     Plain(R.string.plain, R.drawable.np_plain, 3),
     Simple(R.string.simple, R.drawable.np_simple, 8),
     Tiny(R.string.tiny, R.drawable.np_tiny, 7),
+    Car(R.string.car, R.drawable.np_normal, 20),
 }

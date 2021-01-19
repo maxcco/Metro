@@ -37,6 +37,7 @@ import io.github.muntashirakon.music.fragments.NowPlayingScreen.*
 import io.github.muntashirakon.music.fragments.base.AbsPlayerFragment
 import io.github.muntashirakon.music.fragments.player.adaptive.AdaptiveFragment
 import io.github.muntashirakon.music.fragments.player.blur.BlurPlayerFragment
+import io.github.muntashirakon.music.fragments.player.car.CarPlayerFragment
 import io.github.muntashirakon.music.fragments.player.card.CardFragment
 import io.github.muntashirakon.music.fragments.player.cardblur.CardBlurFragment
 import io.github.muntashirakon.music.fragments.player.circle.CirclePlayerFragment
@@ -363,6 +364,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity() {
             Blur -> BlurPlayerFragment()
             Adaptive -> AdaptiveFragment()
             Normal -> PlayerFragment()
+            Car-> CarPlayerFragment()
             Card -> CardFragment()
             BlurCard -> CardBlurFragment()
             Fit -> FitFragment()
