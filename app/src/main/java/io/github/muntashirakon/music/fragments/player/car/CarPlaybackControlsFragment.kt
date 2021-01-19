@@ -22,6 +22,7 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
+import androidx.core.graphics.toColor
 import androidx.lifecycle.lifecycleScope
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -51,18 +52,17 @@ import io.github.muntashirakon.music.util.PreferenceUtil
 import io.github.muntashirakon.music.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_full_player_controls.*
 import kotlinx.android.synthetic.main.fragment_car_player_controls.*
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.nextButton
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.playPauseButton
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.previousButton
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.progressSlider
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.repeatButton
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.shuffleButton
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.songCurrentProgress
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.songInfo
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.songTotalTime
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.text
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.title
+import kotlinx.android.synthetic.main.fragment_car_player_controls.nextButton
+import kotlinx.android.synthetic.main.fragment_car_player_controls.playPauseButton
+import kotlinx.android.synthetic.main.fragment_car_player_controls.previousButton
+import kotlinx.android.synthetic.main.fragment_car_player_controls.progressSlider
+import kotlinx.android.synthetic.main.fragment_car_player_controls.repeatButton
+import kotlinx.android.synthetic.main.fragment_car_player_controls.shuffleButton
+import kotlinx.android.synthetic.main.fragment_car_player_controls.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_car_player_controls.songInfo
+import kotlinx.android.synthetic.main.fragment_car_player_controls.songTotalTime
+import kotlinx.android.synthetic.main.fragment_car_player_controls.text
+import kotlinx.android.synthetic.main.fragment_car_player_controls.title
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -132,6 +132,7 @@ class CarPlaybackControlsFragment :
         updateShuffleState()
         updatePrevNextColor()
         updateNowPlayingColor()
+        updateFavoriteColor()
     }
 
     private fun updateSong() {
@@ -308,10 +309,14 @@ class CarPlaybackControlsFragment :
     }
 
     private fun setUpFavorite() {
-        updateIsFavorite()
         song_favorite?.setOnClickListener {
             toggleFavorite(MusicPlayerRemote.currentSong)
         }
+        updateFavoriteColor()
+    }
+
+    private fun updateFavoriteColor() {
+        song_favorite?.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
     fun updateIsFavorite() {
@@ -325,9 +330,7 @@ class CarPlaybackControlsFragment :
                     val icon =
                         if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
                     song_favorite?.setImageResource(icon)
-                    song_favorite?.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
                 }
-
             }
         }
     }
